@@ -7,7 +7,6 @@ class MemberRequest (
     private val password: String
 ) {
     fun toEntity() : Member = Member(
-        memberId = 0,
         memberName = this.memberName,
         password = this.password
     )

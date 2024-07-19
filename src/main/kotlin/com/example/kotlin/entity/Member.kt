@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor
 class Member (
     @Id
     @GeneratedValue
-    var memberId: Long,
+    var memberId: Long = 0,
     var memberName: String,
     var password: String,
 )
