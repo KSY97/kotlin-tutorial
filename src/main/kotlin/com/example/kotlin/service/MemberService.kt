@@ -12,10 +12,17 @@ class MemberService (private val memberRepository: MemberRepository) {
         memberRepository.findAll()
 
     fun findById(id: Long): Member =
-        memberRepository.findById(id).orElseThrow { RuntimeException() }
+        memberRepository.findById(id)
+            .orElseThrow { RuntimeException() }
 
-    fun register(memberRequest: MemberRequest): Member =
-        memberRepository.save(memberRequest.toEntity())
+    fun register(memberRequest: MemberRequest): Member {
+
+        if(memberRepository.existsByMemberName(memberRequest.memberName)) {
+            throw RuntimeException()
+        }
+
+        return memberRepository.save(memberRequest.toEntity())
+    }
 
     fun deleteById(id: Long): Long {
         memberRepository.deleteById(id)
