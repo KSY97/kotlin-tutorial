@@ -25,7 +25,9 @@ class MemberService (private val memberRepository: MemberRepository) {
     }
 
     fun deleteById(id: Long): Long {
-        memberRepository.deleteById(id)
+        val member: Member = memberRepository.findById(id)
+            .orElseThrow { throw RuntimeException() }
+        memberRepository.delete(member)
         return id
     }
 
